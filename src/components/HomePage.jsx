@@ -6,22 +6,23 @@ async function wait(ms) {
     });
 }
 
-let greeting = ['', 'N', 'Na', 'Nam', 'Nama', 'Namas', 'Namast', 'Namaste', 'Namaste,', 'Namaste, ', 'Namaste, W', 'Namaste, Wo', 'Namaste, Wor', 'Namaste, Worl', 'Namaste, World', 'Namaste, World!'];
-
 function HomePage(props) {
-    let idx = 0;
+    let greeting = 'Namaste, World!'
     let [loading, setLoading] = useState(true);
-    let [greet, setGreet] = useState(greeting[idx]);
+    let [greet, setGreet] = useState(greeting.substring(0, 0));
     let [select, setSelect] = useState(false);
 
     useEffect(() => {
         async function start() {
             for (let i = 0; i < greeting.length; i++) {
-                if (i === 4) setSelect('twitter');
-                if (i === 8) setSelect('linkedin');
-                if (i === 12) setSelect('github');
-                if (i === greeting.length - 1) setSelect(false);
-                setGreet(greeting[i]);
+                if (i === 3) setSelect('twitter');
+                if (i === 7) setSelect('linkedin');
+                if (i === 11) setSelect('github');
+                if (i === greeting.length - 1) {
+                    setSelect(false);
+                    setGreet(greeting);
+                }
+                else setGreet(greeting.substring(0, i));
                 await wait(300);
             }
         }
